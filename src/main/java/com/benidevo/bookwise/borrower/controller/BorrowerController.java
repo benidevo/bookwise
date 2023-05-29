@@ -1,7 +1,12 @@
 package com.benidevo.bookwise.borrower.controller;
 
+import com.benidevo.bookwise.borrower.dto.CreateBorrowerDTO;
+import com.benidevo.bookwise.borrower.dto.UpdateBorrowerDTO;
 import com.benidevo.bookwise.borrower.entity.Borrower;
 import com.benidevo.bookwise.borrower.service.BorrowerService;
+import com.benidevo.bookwise.common.annotation.HandleValidationErrors;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +26,8 @@ public class BorrowerController {
     }
 
     @PostMapping
-    public Borrower createBorrower(@RequestBody Borrower borrower) {
+    @HandleValidationErrors
+    public Borrower createBorrower(@Valid @RequestBody CreateBorrowerDTO borrower, BindingResult result) {
         return this.borrowerService.save(borrower);
     }
 
@@ -31,9 +37,13 @@ public class BorrowerController {
     }
 
     @PutMapping("/{borrowerId}")
-    public Borrower updateBorrow(@RequestBody Borrower borrower, @PathVariable Long borrowerId) {
-        borrower.setId(borrowerId);
-        return this.borrowerService.save(borrower);
+    @HandleValidationErrors
+    public Borrower updateBorrow(
+            @Valid @RequestBody UpdateBorrowerDTO payload,
+            BindingResult bindingResult,
+            @PathVariable Long borrowerId) {
+        payload.setId(borrowerId);
+        return this.borrowerService.update(payload);
     }
 
     @DeleteMapping("/{borrowerId}")

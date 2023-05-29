@@ -1,7 +1,10 @@
 package com.benidevo.bookwise.borrower.service;
 
+import com.benidevo.bookwise.borrower.dto.CreateBorrowerDTO;
+import com.benidevo.bookwise.borrower.dto.UpdateBorrowerDTO;
 import com.benidevo.bookwise.borrower.entity.Borrower;
 import com.benidevo.bookwise.borrower.repository.BorrowerRepository;
+import com.benidevo.bookwise.common.exception.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +21,16 @@ public class BorrowerServiceImpl implements BorrowerService{
     }
 
     @Override
-    public Borrower save(Borrower borrower) {
+    public Borrower save(CreateBorrowerDTO borrower) {
+        Borrower newBorrower = new Borrower(borrower.getFirstName(), borrower.getLastName(),
+                                                borrower.getEmail(), borrower.getAddress());
+        return this.borrowerRepository.save(newBorrower);
+    }
+
+    @Override
+    public Borrower update(UpdateBorrowerDTO updateBorrowerDTO) {
+        Borrower borrower = this.findById(updateBorrowerDTO.getId());
+        updateBorrowerDTO.updateFields(borrower);
         return this.borrowerRepository.save(borrower);
     }
 
@@ -36,7 +48,7 @@ public class BorrowerServiceImpl implements BorrowerService{
         if (result.isPresent()) {
             borrower = result.get();
         } else {
-            throw new RuntimeException("Borrower not found");
+            throw new RecordNotFoundException("Borrower not found");
         }
 
         return borrower;
