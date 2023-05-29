@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/book_wise
+    username: root
+    password: mysecretpassword
+  jpa:
+    hibernate:
+#      ddl-auto: create
+    show-sql: false
+
+logging:
+  level:
+    root: warn
