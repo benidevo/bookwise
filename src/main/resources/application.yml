@@ -5,7 +5,7 @@ spring:
     password: mysecretpassword
   jpa:
     hibernate:
-#      ddl-auto: create
+#      ddl-auto: update
     show-sql: false
 
 logging:

@@ -81,4 +81,14 @@ public class UpdateBorrowerDTO {
         }
     }
 
+    @Override
+    public String toString() {
+        return "UpdateBorrowerDTO{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }

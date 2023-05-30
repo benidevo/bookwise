@@ -1,6 +1,11 @@
 package com.benidevo.bookwise.borrower.entity;
 
+import com.benidevo.bookwise.book.entity.Book;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "borrower")
@@ -21,6 +26,20 @@ public class Borrower {
 
     @Column(name = "address")
     private String address;
+
+    @ManyToMany
+    @JoinTable(
+            name = "borrower_books",
+            joinColumns = @JoinColumn(name = "borrower_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private List<Book> books = new ArrayList<>();
+
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Column(name = "update_at")
+    private Date updateAt;
 
     public Borrower() {
     }
@@ -72,6 +91,33 @@ public class Borrower {
         this.address = address;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = new Date();
+        this.updateAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updateAt = new Date();
+    }
+
     @Override
     public String toString() {
         return "Borrower{" +
@@ -80,6 +126,7 @@ public class Borrower {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
+                ", books='" + books + '\'' +
                 '}';
     }
 }
