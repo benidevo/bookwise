@@ -19,4 +19,11 @@ public class GlobalExceptionHandler {
         errorResponse.setMessage(ex.getMessage());
         return ResponseEntity.badRequest().body(errorResponse);
     }
+
+    @ExceptionHandler(AppError.class)
+    public ResponseEntity<ErrorResponse> handleAppError(AppError err) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage((err.getMessage()));
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
 }

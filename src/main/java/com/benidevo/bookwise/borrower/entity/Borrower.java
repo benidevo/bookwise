@@ -1,6 +1,8 @@
 package com.benidevo.bookwise.borrower.entity;
 
 import com.benidevo.bookwise.book.entity.Book;
+import com.benidevo.bookwise.loan.entity.Loan;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -35,11 +37,15 @@ public class Borrower {
     )
     private List<Book> books = new ArrayList<>();
 
+    @OneToMany(mappedBy = "borrower")
+    @JsonManagedReference
+    private List<Loan> loans = new ArrayList<>();;
+
     @Column(name = "created_at")
     private Date createdAt;
 
     @Column(name = "update_at")
-    private Date updateAt;
+    private Date updatedAt;
 
     public Borrower() {
     }
@@ -91,6 +97,14 @@ public class Borrower {
         this.address = address;
     }
 
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -99,23 +113,23 @@ public class Borrower {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdateAt() {
-        return updateAt;
+    public Date updatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdateAt(Date updateAt) {
-        this.updateAt = updateAt;
+    public void updatedAt(Date updateAt) {
+        this.updatedAt = updateAt;
     }
 
     @PrePersist
     protected void onCreate() {
         this.createdAt = new Date();
-        this.updateAt = new Date();
+        this.updatedAt = new Date();
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.updateAt = new Date();
+        this.updatedAt = new Date();
     }
 
     @Override
@@ -127,6 +141,9 @@ public class Borrower {
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", books='" + books + '\'' +
+                ", loans='" + loans + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", updatedAt='" + updatedAt + '\'' +
                 '}';
     }
 }
