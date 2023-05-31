@@ -10,20 +10,24 @@ BookWise API is a web-based Library Management System implementation built with 
 
 ## Technologies Used
 
-- Java
-- Spring Boot
-- Spring Data JPA
-- Spring Web
-- MySQL (or any preferred database)
-- Maven (for dependency management)
-- RESTful API principles
+- [Java](https://www.java.com/)
+- [Spring Boot](https://spring.io/projects/spring-boot)
+- [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
+- [Spring Web](https://spring.io/projects/spring-web)
+- [MySQL](https://www.mysql.com/)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [Maven](https://maven.apache.org/)
+- [RESTful API principles](https://restfulapi.net/)
+
+For more information about these technologies, please refer to the provided links.
 
 ## Getting Started
 
 ### Prerequisites
 
-- Java 11 or above
-- MySQL (or any preferred database) installed and running
+- Docker
+- Docker Compose
 
 ### Installation
 
@@ -33,16 +37,10 @@ BookWise API is a web-based Library Management System implementation built with 
 git clone https://github.com/benidevo/bookwise-api.git
 ```
 
-2.  Configure the database connection in the application.properties file:
-
-```agsl
-spring.datasource.url=jdbc:mysql://localhost:3306/bookwise
-spring.datasource.username=your-username
-spring.datasource.password=your-password
-```
-
-3. Run the application:
+2. Build and run the application:
 
 ```shell
-mvn spring-boot:run
+make build
 ```
+For other commands, check the Makefile in the root directory
+

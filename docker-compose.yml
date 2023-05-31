@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  bw-api:
+    build:
+      context: .
+      dockerfile: docker/api/Dockerfile
+    container_name: bw-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src:/app/src
+      - ./pom.xml:/app/pom.xml
+    depends_on:
+      - bw-db
+    networks:
+      - bw-network
+
+  bw-db:
+    image: mysql:8.0
+    container_name: bw-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+      MYSQL_DATABASE: book_wise
+    volumes:
+      - bw-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - bw-network
+
+volumes:
+  bw-data:
+
+networks:
+  bw-network:
+    driver: bridge
