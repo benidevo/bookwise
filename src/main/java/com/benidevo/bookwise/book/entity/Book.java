@@ -1,9 +1,7 @@
 package com.benidevo.bookwise.book.entity;
 
-import com.benidevo.bookwise.borrower.entity.Borrower;
 import com.benidevo.bookwise.loan.entity.Loan;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -39,11 +37,8 @@ public class Book {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    @ManyToMany(mappedBy = "books")
-    private List<Borrower> borrowers = new ArrayList<>();
-
     @OneToMany(mappedBy = "book")
-    @JsonManagedReference
+    @JsonBackReference
     private List<Loan> loans = new ArrayList<>();;
 
     public Book() {
@@ -121,14 +116,6 @@ public class Book {
         this.updatedAt = updatedAt;
     }
 
-    public List<Borrower> getBorrowers() {
-        return borrowers;
-    }
-
-    public void setBorrowers(List<Borrower> borrowers) {
-        this.borrowers = borrowers;
-    }
-
     public List<Loan> getLoans() {
         return loans;
     }
@@ -157,7 +144,6 @@ public class Book {
                 ", ISBN='" + ISBN + '\'' +
                 ", publicationYear=" + publicationYear +
                 ", quantity=" + quantity +
-                ", borrowers=" + borrowers +
                 ", loans=" + loans +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

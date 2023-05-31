@@ -6,7 +6,7 @@ import com.benidevo.bookwise.loan.entity.Loan;
 import java.util.List;
 
 public interface LoanService {
-    void save(CreateLoanDTO createLoanDTO);
+    Loan save(CreateLoanDTO createLoanDTO);
 
     List<Loan> findAll();
 

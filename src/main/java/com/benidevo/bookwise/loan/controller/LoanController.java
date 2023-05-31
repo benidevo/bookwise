@@ -23,8 +23,8 @@ public class LoanController {
 
     @PostMapping
     @HandleValidationErrors
-    public void createLoan(@Valid @RequestBody CreateLoanDTO createLoanDTO, BindingResult result) {
-        this.loanService.save(createLoanDTO);
+    public Loan createLoan(@Valid @RequestBody CreateLoanDTO createLoanDTO, BindingResult result) {
+        return this.loanService.save(createLoanDTO);
     }
 
     @GetMapping

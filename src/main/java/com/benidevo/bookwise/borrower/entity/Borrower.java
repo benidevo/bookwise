@@ -2,7 +2,7 @@ package com.benidevo.bookwise.borrower.entity;
 
 import com.benidevo.bookwise.book.entity.Book;
 import com.benidevo.bookwise.loan.entity.Loan;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -35,10 +35,11 @@ public class Borrower {
             joinColumns = @JoinColumn(name = "borrower_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
+    @JsonBackReference
     private List<Book> books = new ArrayList<>();
 
     @OneToMany(mappedBy = "borrower")
-    @JsonManagedReference
+    @JsonBackReference
     private List<Loan> loans = new ArrayList<>();;
 
     @Column(name = "created_at")

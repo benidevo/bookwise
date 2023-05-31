@@ -2,8 +2,9 @@ package com.benidevo.bookwise.loan.entity;
 
 import com.benidevo.bookwise.book.entity.Book;
 import com.benidevo.bookwise.borrower.entity.Borrower;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
 
 import java.util.Date;
 
@@ -15,12 +16,12 @@ public class Loan {
     private Long id;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "borrower_id")
     private Borrower borrower;
 
-    @ManyToOne
-    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JsonManagedReference
     @JoinColumn(name = "book_id")
     private Book book;
 
@@ -35,6 +36,8 @@ public class Loan {
 
     @Column(name = "updated_at", nullable = false)
     private Date updatedAt;
+
+//    private BookRepository bookRepository;
 
     public Loan() {
     }
@@ -115,8 +118,6 @@ public class Loan {
     public String toString() {
         return "Loan{" +
                 "id=" + id +
-                ", borrower=" + borrower +
-                ", book=" + book +
                 ", loanDate=" + loanDate +
                 ", returnedDate=" + returnedDate +
                 ", createdAt=" + createdAt +
