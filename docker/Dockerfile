@@ -12,7 +12,7 @@ RUN ./mvnw dependency:resolve
 
 COPY src ./src
 
-COPY ./docker/api/entrypoint.sh /app/entrypoint.sh
+COPY ./docker/entrypoint.sh /app/entrypoint.sh
 
 RUN chmod +x /app/entrypoint.sh
 

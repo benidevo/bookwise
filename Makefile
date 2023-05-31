@@ -12,9 +12,6 @@ down:
 down-v:
 	docker compose down -v
 
-test:
-	docker compose -f local.yml run --rm api pytest -p no:warnings --cov=. -v
-
 show-logs-db:
 	docker compose logs bw-db
 

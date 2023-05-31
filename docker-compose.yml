@@ -4,7 +4,7 @@ services:
   bw-api:
     build:
       context: .
-      dockerfile: docker/api/Dockerfile
+      dockerfile: docker/Dockerfile
     container_name: bw-api
     ports:
       - "8080:8080"

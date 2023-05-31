@@ -12,15 +12,10 @@ BookWise API is a web-based Library Management System implementation built with 
 
 - [Java](https://www.java.com/)
 - [Spring Boot](https://spring.io/projects/spring-boot)
-- [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
-- [Spring Web](https://spring.io/projects/spring-web)
 - [MySQL](https://www.mysql.com/)
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
 - [Maven](https://maven.apache.org/)
-- [RESTful API principles](https://restfulapi.net/)
-
-For more information about these technologies, please refer to the provided links.
 
 ## Getting Started
 
@@ -42,5 +37,10 @@ git clone https://github.com/benidevo/bookwise-api.git
 ```shell
 make build
 ```
-For other commands, check the Makefile in the root directory
+- For other commands, check the Makefile in the root directory
+
+3. View API Documentation
+
+- http://localhost:8080/api-docs
+
 

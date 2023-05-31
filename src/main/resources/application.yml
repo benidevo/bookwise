@@ -8,6 +8,10 @@ spring:
       ddl-auto: update
     show-sql: false
 
+springdoc:
+    swagger-ui:
+      path: "/api-docs"
+
 logging:
   level:
     root: warn
