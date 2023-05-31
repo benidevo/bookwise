@@ -29,8 +29,8 @@ public class BookController {
     }
 
     @GetMapping
-    public List<Book> getBooks() {
-        return this.bookService.findAll();
+    public List<Book> getBooks(@RequestParam(required = false) String title) {
+        return this.bookService.findAll(title);
     }
 
     @GetMapping("/{bookId}")

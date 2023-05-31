@@ -9,7 +9,7 @@ import java.util.List;
 public interface BookService {
     Book save(CreateBookDTO bookDTO);
 
-    List<Book> findAll();
+    List<Book> findAll(String title);
 
     Book findById(Long bookId);
 

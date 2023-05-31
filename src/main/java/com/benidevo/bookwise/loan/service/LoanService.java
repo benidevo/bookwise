@@ -8,9 +8,13 @@ import java.util.List;
 public interface LoanService {
     Loan save(CreateLoanDTO createLoanDTO);
 
-    List<Loan> findAll();
+    List<Loan> findAll(Long bookId, Long borrowerId);
 
     Loan findById(Long loanId);
 
     Loan pay(Long loanId);
+
+    List<Loan> findOpen();
+
+    List<Loan> findClosed();
 }

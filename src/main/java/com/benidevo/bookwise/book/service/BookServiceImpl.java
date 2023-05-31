@@ -29,9 +29,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findAll() {
+    public List<Book> findAll(String title) {
+        if (title != null && !title.isEmpty()) {
+            return this.bookRepository.findByTitleContainingIgnoreCase(title);
+        }
         return this.bookRepository.findAll();
     }
+
 
     @Override
     public Book findById(Long bookId) {

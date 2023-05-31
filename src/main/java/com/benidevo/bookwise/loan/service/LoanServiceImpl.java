@@ -14,7 +14,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -64,8 +63,18 @@ public class LoanServiceImpl implements LoanService{
     }
 
     @Override
-    public List<Loan> findAll() {
-        return this.loanRepository.findAll();
+    public List<Loan> findAll(Long bookId, Long borrowerId) {
+       if (borrowerId != null) {
+           Borrower borrower = this.borrowerService.findById(borrowerId);
+           return this.loanRepository.findByBorrower(borrower);
+       }
+
+       if (bookId != null) {
+           Book book = this.bookService.findById(bookId);
+           return this.loanRepository.findByBook(book);
+       }
+
+       return this.loanRepository.findAll();
     }
 
     @Override
@@ -92,5 +101,15 @@ public class LoanServiceImpl implements LoanService{
         Book book = loan.getBook();
         book.setQuantity(book.getQuantity() + 1);
         return this.loanRepository.save(loan);
+    }
+
+    @Override
+    public List<Loan> findOpen() {
+        return this.loanRepository.findByReturnedDateIsNull();
+    }
+
+    @Override
+    public List<Loan> findClosed() {
+        return this.loanRepository.findByReturnedDateNotNull();
     }
 }
